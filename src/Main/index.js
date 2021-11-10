@@ -1,6 +1,6 @@
 import React from 'react';
-import Main from './Main';
+import TopAppBar from './TopAppBar';
 
 export default () => (
-  <Main />
+  <TopAppBar />
 );

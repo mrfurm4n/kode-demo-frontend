@@ -1,6 +1,6 @@
 import React from 'react';
-import Main from './Main';
+import SearchBar from './SearchBar';
 
 export default () => (
-  <Main />
+  <SearchBar />
 );
