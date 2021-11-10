@@ -1,17 +1,21 @@
-@font-face {
+html {
   font-family: 'Inter', sans-serif;
+}
+
+@font-face {
+  font-family: 'Inter';
   src: url("./UI/Inter-Regular.ttf") format("truetype");
   font-weight: 400;
 }
 
 @font-face {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter';
   src: url("./UI/Inter-Medium.ttf") format("truetype");
   font-weight: 500;
 }
 
 @font-face {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter';
   src: url("./UI/Inter-Bold.ttf") format("truetype");
   font-weight: 700;
 }
