@@ -44,13 +44,24 @@ const Departament = styled.span`
   margin-top: 3px;
 `;
 
-export default () => (
-  <Card>
-    <Avatar />
-    <Chars>
-      <Name>Алексей Миногаров</Name>
-      <Tag>mi</Tag>
-      <Departament>Analyst</Departament>
-    </Chars>
-  </Card>
-);
+export default (props) => {
+  const {
+    avatarUrl,
+    firstName,
+    lastName,
+    userTag,
+    department,
+    position,
+  } = props;
+
+  return (
+    <Card>
+      <Avatar src={avatarUrl} />
+      <Chars>
+        <Name>{`${firstName} ${lastName}`}</Name>
+        <Tag>{userTag}</Tag>
+        <Departament>{`${department} ${position}`}</Departament>
+      </Chars>
+    </Card>
+  );
+};
