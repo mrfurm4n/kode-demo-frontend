@@ -4,9 +4,9 @@ import ContentLoader from 'react-content-loader';
 export default () => (
   <ContentLoader
     speed={2}
-    width={343}
+    width={280}
     height={84}
-    viewBox="0 0 343 84"
+    viewBox="0 0 280 84"
     backgroundColor="#F3F3F6"
     foregroundColor="#FAFAFA"
     style={{ marginBottom: '12px', display: 'block' }}
