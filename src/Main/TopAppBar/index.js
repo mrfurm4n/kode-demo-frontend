@@ -16,9 +16,11 @@ const Title = styled.h2`
   padding-bottom: 12px;
 `;
 
+const hideSort = true;
+
 export default () => (
   <>
-    <Sort />
+    {hideSort ? '' : <Sort />}
     <Title>Поиск</Title>
     <SearchBar />
     <TabsBar />
