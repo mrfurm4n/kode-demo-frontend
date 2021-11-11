@@ -4,7 +4,7 @@ import TopAppBar from './TopAppBar';
 import List from './List';
 import ErrorScreen from './ErrorScreen';
 
-const Main = styled.div`
+export const MainWrap = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,9 +13,11 @@ const Main = styled.div`
 
 const isError = false;
 
-export default () => (
-  <Main>
+const Main = () => (
+  <MainWrap>
     <TopAppBar />
     {isError ? <ErrorScreen /> : <List />}
-  </Main>
+  </MainWrap>
 );
+
+export default Main;
