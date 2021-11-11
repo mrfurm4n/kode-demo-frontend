@@ -21,7 +21,7 @@ const tabsTitles = ['Все', 'Designers', 'Analysts', 'Managers', 'iOS', 'Andro
 export default () => (
   <TabsBar>
     {tabsTitles.map((title) => (
-      <Tab title={title} />
+      <Tab key={title} title={title} />
     ))}
   </TabsBar>
 );
