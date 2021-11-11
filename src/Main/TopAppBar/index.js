@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchBar from './SearchBar';
+import Sort from './Sort';
 import TabsBar from './TabsBar';
 
 const Title = styled.h2`
@@ -17,6 +18,7 @@ const Title = styled.h2`
 
 export default () => (
   <>
+    <Sort />
     <Title>Поиск</Title>
     <SearchBar />
     <TabsBar />
