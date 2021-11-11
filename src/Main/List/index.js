@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Card from './Card';
+import MyLoader from './MyLoader';
 
 const CardList = styled.div`
   padding-top: 16px;
@@ -14,21 +15,28 @@ const apiUrl = 'https://stoplight.io/mocks/kode-education/trainee-test/25143926/
 export default class List extends React.Component {
   constructor() {
     super();
-    this.state = { persons: [] };
+    this.state = {
+      persons: [],
+      isLoading: true,
+    };
   }
 
   componentDidMount() {
     axios.get(apiUrl)
       .then((res) => {
-        this.setState({ persons: res.data.items });
+        this.setState({
+          persons: res.data.items,
+          isLoading: false,
+        });
       });
   }
 
   render() {
-    const { persons } = this.state;
+    const { persons, isLoading } = this.state;
 
     return (
       <CardList>
+        {isLoading ? <MyLoader /> : ''}
         {persons.map((person) => (
           <Card
             key={person.id}
