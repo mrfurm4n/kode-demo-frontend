@@ -24,6 +24,7 @@ const Window = styled.div`
   padding-top: 24px;
   padding-bottom: 26px;
   width: 370px;
+  max-width: 100%;
 `;
 
 const Header = styled.div`
