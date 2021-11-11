@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import search from '../../../UI/search.svg';
 import sort from '../../../UI/sort.svg';
 
-const Bar = styled.div`
+const SearchBar = styled.div`
   margin-top: 6px;
   margin-bottom: 6px;
   margin-right: 16px;
@@ -63,9 +63,9 @@ const SortButton = styled.button`
 `;
 
 export default () => (
-  <Bar>
+  <SearchBar>
     <SearchButton />
     <Input placeholder="Введи имя, тег, почту..." />
     <SortButton />
-  </Bar>
+  </SearchBar>
 );
