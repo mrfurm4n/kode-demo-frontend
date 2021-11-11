@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import prevArrow from '../../UI/prevArrow.svg';
+import prevArrow from '../../UI/icons/prevArrow.svg';
 
 const Head = styled.div`
   background: #F7F7F8;

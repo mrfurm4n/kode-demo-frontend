@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import search from '../../../UI/search.svg';
-import sort from '../../../UI/sort.svg';
+import search from '../../../UI/icons/search.svg';
+import sort from '../../../UI/icons/sort.svg';
 
 const SearchBar = styled.div`
   margin-top: 6px;

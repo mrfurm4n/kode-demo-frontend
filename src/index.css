@@ -4,18 +4,18 @@ html {
 
 @font-face {
   font-family: 'Inter';
-  src: url("./UI/Inter-Regular.ttf") format("truetype");
+  src: url("./UI/fonts/Inter-Regular.ttf") format("truetype");
   font-weight: 400;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url("./UI/Inter-Medium.ttf") format("truetype");
+  src: url("./UI/fonts/Inter-Medium.ttf") format("truetype");
   font-weight: 500;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url("./UI/Inter-Bold.ttf") format("truetype");
-  font-weight: 700;
+  src: url("./UI/fonts/Inter-Bold.ttf") format("truetype");
+  font-weight: 600;
 }

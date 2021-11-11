@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Input from './Input';
-import close from '../../../UI/close.svg';
+import close from '../../../UI/icons/close.svg';
 
 const Overlay = styled.div`
   position: fixed;

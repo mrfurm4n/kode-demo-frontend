@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import star from '../../UI/star.svg';
-import phone from '../../UI/phone.svg';
+import star from '../../UI/icons/star.svg';
+import phone from '../../UI/icons/phone.svg';
 
 const Bottom = styled.div`
   padding-top: 26px;
