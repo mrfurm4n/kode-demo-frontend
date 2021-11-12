@@ -16,17 +16,42 @@ const Title = styled.h2`
   padding-bottom: 12px;
 `;
 
-const hideSort = true;
+export default class TopAppBar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      sortOpen: false,
+    };
+  }
 
-export default ({ tabsTitles, switchOpeningTab, openedTab }) => (
-  <>
-    {!hideSort && (<Sort />)}
-    <Title>Поиск</Title>
-    <SearchBar />
-    <TabsBar
-      openedTab={openedTab}
-      switchOpeningTab={switchOpeningTab}
-      tabsTitles={tabsTitles}
-    />
-  </>
-);
+  switchOpeningSort = (current) => this.setState({ sortOpen: !current });
+
+  render() {
+    const { sortOpen } = this.state;
+    const {
+      tabsTitles,
+      switchOpeningTab,
+      openedTab,
+    } = this.props;
+    return (
+      <>
+        {sortOpen && (
+          <Sort
+            sortOpen={sortOpen}
+            switchOpeningSort={this.switchOpeningSort}
+          />
+        )}
+        <Title>Поиск</Title>
+        <SearchBar
+          sortOpen={sortOpen}
+          switchOpeningSort={this.switchOpeningSort}
+        />
+        <TabsBar
+          openedTab={openedTab}
+          switchOpeningTab={switchOpeningTab}
+          tabsTitles={tabsTitles}
+        />
+      </>
+    );
+  }
+}

@@ -54,15 +54,24 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default () => (
-  <Overlay>
-    <Window>
-      <Header>
-        <Title>Сортировка</Title>
-        <Button />
-      </Header>
-      <Input title="По алфавиту" />
-      <Input title="По дню рождения" />
-    </Window>
-  </Overlay>
-);
+export default class Sort extends React.Component {
+  switchOpeningSort = () => {
+    const { sortOpen, switchOpeningSort } = this.props;
+    switchOpeningSort(sortOpen);
+  }
+
+  render() {
+    return (
+      <Overlay>
+        <Window>
+          <Header>
+            <Title>Сортировка</Title>
+            <Button onClick={this.switchOpeningSort} />
+          </Header>
+          <Input title="По алфавиту" />
+          <Input title="По дню рождения" />
+        </Window>
+      </Overlay>
+    );
+  }
+}
