@@ -13,17 +13,33 @@ const Input = styled.span`
 `;
 
 const Circle = styled.span`
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: 24px;
   height: 24px;
   border-radius: 50%;
   margin-right: 12px;
-  border: 2px solid #6534FF;
+  position: relative;
+  box-sizing: border-box;
+  border: ${(props) => (props.active ? '8px' : '2px')} solid #6534FF;
+  transition: border-width 0.2s ease-in-out;
 `;
 
-export default ({ title }) => (
-  <Input>
-    <Circle />
-    {title}
-  </Input>
-);
+export default (props) => {
+  const {
+    title,
+    type,
+    sortType,
+    switchCheckingSort,
+  } = props;
+
+  const switchCheckSort = () => switchCheckingSort(type);
+
+  return (
+    <Input onClick={switchCheckSort}>
+      <Circle active={sortType === type} />
+      {title}
+    </Input>
+  );
+};

@@ -25,6 +25,8 @@ export default (props) => {
     tabsTitles,
     switchOpeningTab,
     openedTab,
+    switchCheckingSort,
+    sortType,
   } = props;
 
   return (
@@ -33,6 +35,8 @@ export default (props) => {
         <Sort
           sortOpen={sortOpen}
           switchOpeningSort={switchOpeningSort}
+          switchCheckingSort={switchCheckingSort}
+          sortType={sortType}
         />
       )}
       <Title>Поиск</Title>

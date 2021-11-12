@@ -54,15 +54,26 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-export default ({ sortOpen, switchOpeningSort }) => (
-  <Overlay>
-    <Window>
-      <Header>
-        <Title>Сортировка</Title>
-        <Button onClick={switchOpeningSort(sortOpen)} />
-      </Header>
-      <Input title="По алфавиту" />
-      <Input title="По дню рождения" />
-    </Window>
-  </Overlay>
-);
+export default (props) => {
+  const {
+    sortOpen,
+    switchOpeningSort,
+    sortType,
+    switchCheckingSort,
+  } = props;
+
+  const switchOpenSort = () => switchOpeningSort(sortOpen);
+
+  return (
+    <Overlay>
+      <Window>
+        <Header>
+          <Title>Сортировка</Title>
+          <Button onClick={switchOpenSort} />
+        </Header>
+        <Input type="alphabet" switchCheckingSort={switchCheckingSort} sortType={sortType} title="По алфавиту" />
+        <Input type="birthday" switchCheckingSort={switchCheckingSort} sortType={sortType} title="По дню рождения" />
+      </Window>
+    </Overlay>
+  );
+};

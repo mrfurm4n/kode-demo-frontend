@@ -75,8 +75,10 @@ export default () => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [openedTab, setOpenedTab] = useState(tabsTitles[0].id);
+  const [sortType, setSortType] = useState('alphabet');
 
   const switchOpeningTab = (id) => (openedTab !== id) && setOpenedTab(id);
+  const switchCheckingSort = (type) => (sortType !== type) && setSortType(type);
 
   useEffect(() => {
     axios.get(apiUrl)
@@ -94,8 +96,10 @@ export default () => {
     <Main>
       <TopAppBar
         switchOpeningTab={switchOpeningTab}
+        switchCheckingSort={switchCheckingSort}
         tabsTitles={tabsTitles}
         openedTab={openedTab}
+        sortType={sortType}
       />
       {isError && (<ErrorScreen />)}
       {isLoading ? (
