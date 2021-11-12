@@ -71,8 +71,8 @@ export default (props) => {
           <Title>Сортировка</Title>
           <Button onClick={switchOpenSort} />
         </Header>
-        <Input type="alphabet" switchCheckingSort={switchCheckingSort} sortType={sortType} title="По алфавиту" />
-        <Input type="birthday" switchCheckingSort={switchCheckingSort} sortType={sortType} title="По дню рождения" />
+        <Input type="alphabet" sortOpen={sortOpen} switchOpenSort={switchOpenSort} switchCheckingSort={switchCheckingSort} sortType={sortType} title="По алфавиту" />
+        <Input type="birthday" sortOpen={sortOpen} switchOpenSort={switchOpenSort} switchCheckingSort={switchCheckingSort} sortType={sortType} title="По дню рождения" />
       </Window>
     </Overlay>
   );

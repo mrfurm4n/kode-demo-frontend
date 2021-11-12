@@ -32,9 +32,14 @@ export default (props) => {
     type,
     sortType,
     switchCheckingSort,
+    switchOpenSort,
+    sortOpen,
   } = props;
 
-  const switchCheckSort = () => switchCheckingSort(type);
+  const switchCheckSort = () => {
+    switchCheckingSort(type);
+    switchOpenSort(sortOpen);
+  };
 
   return (
     <Input onClick={switchCheckSort}>

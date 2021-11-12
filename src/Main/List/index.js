@@ -9,22 +9,34 @@ export const CardList = styled.div`
 `;
 
 function List(props) {
-  const { persons, tabsTitles, openedTab } = props;
+  const {
+    persons,
+    tabsTitles,
+    openedTab,
+    sortType,
+  } = props;
   const convertDepartament = (departament) => tabsTitles.filter((obj) => (obj.id === departament ? obj : ''));
   return (
     <CardList>
-      {persons.map((person) => (
-        <Card
-          key={person.id}
-          avatarUrl={person.avatarUrl}
-          firstName={person.firstName}
-          lastName={person.lastName}
-          userTag={person.userTag}
-          openedTab={openedTab}
-          department={convertDepartament(person.department)}
-          position={person.position}
-        />
-      ))}
+      {
+        persons
+          .sort((a, b) => {
+            if (sortType === 'birthday') return a.birthday > b.birthday ? 1 : -1;
+            return a.firstName > b.firstName ? 1 : -1;
+          })
+          .map((person) => (
+            <Card
+              key={person.id}
+              avatarUrl={person.avatarUrl}
+              firstName={person.firstName}
+              lastName={person.lastName}
+              userTag={person.userTag}
+              openedTab={openedTab}
+              department={convertDepartament(person.department)}
+              position={person.position}
+            />
+          ))
+      }
     </CardList>
   );
 }

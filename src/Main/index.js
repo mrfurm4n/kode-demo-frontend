@@ -105,7 +105,12 @@ export default () => {
       {isLoading ? (
         <LoadingScreen />
       ) : (
-        <List openedTab={openedTab} tabsTitles={tabsTitles} persons={persons} />
+        <List
+          openedTab={openedTab}
+          sortType={sortType}
+          tabsTitles={tabsTitles}
+          persons={persons}
+        />
       )}
     </Main>
   );
