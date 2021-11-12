@@ -9,37 +9,16 @@ const TabsWrap = styled.div`
   border-bottom 0.33px solid #C3C3C6;
 `;
 
-export default class TabsBar extends React.Component {
-  constructor({ tabsTitles }) {
-    super();
-    // const { tabsTitles } = this.props;
-    this.state = {
-      openedTab: tabsTitles[0].id,
-    };
-  }
-
-  switchOpeningTab = (id) => {
-    const { openedTab } = this.state;
-    if (openedTab !== id) {
-      this.setState({ openedTab: id });
-    }
-  };
-
-  render() {
-    const { openedTab } = this.state;
-    const { tabsTitles } = this.props;
-    return (
-      <TabsWrap>
-        {tabsTitles.map((item) => (
-          <Tab
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            openedTab={openedTab}
-            switchOpeningTab={this.switchOpeningTab}
-          />
-        ))}
-      </TabsWrap>
-    );
-  }
-}
+export default ({ tabsTitles, openedTab, switchOpeningTab }) => (
+  <TabsWrap>
+    {tabsTitles.map((item) => (
+      <Tab
+        key={item.id}
+        id={item.id}
+        title={item.title}
+        openedTab={openedTab}
+        switchOpeningTab={switchOpeningTab}
+      />
+    ))}
+  </TabsWrap>
+);

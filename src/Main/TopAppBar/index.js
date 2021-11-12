@@ -18,11 +18,15 @@ const Title = styled.h2`
 
 const hideSort = true;
 
-export default ({ tabsTitles }) => (
+export default ({ tabsTitles, switchOpeningTab, openedTab }) => (
   <>
     {hideSort ? '' : <Sort />}
     <Title>Поиск</Title>
     <SearchBar />
-    <TabsBar tabsTitles={tabsTitles} />
+    <TabsBar
+      openedTab={openedTab}
+      switchOpeningTab={switchOpeningTab}
+      tabsTitles={tabsTitles}
+    />
   </>
 );

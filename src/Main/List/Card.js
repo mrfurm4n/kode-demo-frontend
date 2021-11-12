@@ -52,16 +52,21 @@ export default (props) => {
     userTag,
     department,
     position,
+    openedTab,
   } = props;
 
   return (
-    <Card>
-      <Avatar src={avatarUrl} />
-      <Chars>
-        <Name>{`${firstName} ${lastName}`}</Name>
-        <Tag>{userTag}</Tag>
-        <Departament>{`${department[0].title} ${position}`}</Departament>
-      </Chars>
-    </Card>
+    <>
+      {(openedTab === department[0].id || openedTab === 'all') ? (
+        <Card>
+          <Avatar src={avatarUrl} />
+          <Chars>
+            <Name>{`${firstName} ${lastName}`}</Name>
+            <Tag>{userTag}</Tag>
+            <Departament>{`${department[0].title} ${position}`}</Departament>
+          </Chars>
+        </Card>
+      ) : ''}
+    </>
   );
 };

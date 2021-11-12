@@ -77,6 +77,7 @@ export default class Main extends React.Component {
       persons: [],
       isLoading: true,
       isError: false,
+      openedTab: tabsTitles[0].id,
     };
   }
 
@@ -91,14 +92,33 @@ export default class Main extends React.Component {
       .catch(() => this.setState({ isError: true, isLoading: false }));
   }
 
-  render() {
-    const { persons, isError, isLoading } = this.state;
+  switchOpeningTab = (id) => {
+    const { openedTab } = this.state;
+    if (openedTab !== id) {
+      this.setState({ openedTab: id });
+    }
+  };
 
+  render() {
+    const {
+      persons,
+      isError,
+      isLoading,
+      openedTab,
+    } = this.state;
     return (
       <MainWrap>
-        <TopAppBar tabsTitles={tabsTitles} />
+        <TopAppBar
+          switchOpeningTab={this.switchOpeningTab}
+          tabsTitles={tabsTitles}
+          openedTab={openedTab}
+        />
         {isError ? <ErrorScreen /> : ''}
-        {isLoading ? <LoadingScreen /> : <List tabsTitles={tabsTitles} persons={persons} />}
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          <List openedTab={openedTab} tabsTitles={tabsTitles} persons={persons} />
+        )}
       </MainWrap>
     );
   }
