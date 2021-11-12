@@ -113,7 +113,7 @@ export default class Main extends React.Component {
           tabsTitles={tabsTitles}
           openedTab={openedTab}
         />
-        {isError ? <ErrorScreen /> : ''}
+        {isError && (<ErrorScreen />)}
         {isLoading ? (
           <LoadingScreen />
         ) : (

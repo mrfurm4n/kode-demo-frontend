@@ -20,7 +20,7 @@ const hideSort = true;
 
 export default ({ tabsTitles, switchOpeningTab, openedTab }) => (
   <>
-    {hideSort ? '' : <Sort />}
+    {!hideSort && (<Sort />)}
     <Title>Поиск</Title>
     <SearchBar />
     <TabsBar

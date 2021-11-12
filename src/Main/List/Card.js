@@ -57,7 +57,7 @@ export default (props) => {
 
   return (
     <>
-      {(openedTab === department[0].id || openedTab === 'all') ? (
+      {(openedTab === department[0].id || openedTab === 'all') && (
         <Card>
           <Avatar src={avatarUrl} />
           <Chars>
@@ -66,7 +66,7 @@ export default (props) => {
             <Departament>{`${department[0].title} ${position}`}</Departament>
           </Chars>
         </Card>
-      ) : ''}
+      )}
     </>
   );
 };
