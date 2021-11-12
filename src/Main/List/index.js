@@ -8,7 +8,8 @@ export const CardList = styled.div`
   padding-right: 16px;
 `;
 
-function List({ persons, tabsTitles, openedTab }) {
+function List(props) {
+  const { persons, tabsTitles, openedTab } = props;
   const convertDepartament = (departament) => tabsTitles.filter((obj) => (obj.id === departament ? obj : ''));
   return (
     <CardList>
