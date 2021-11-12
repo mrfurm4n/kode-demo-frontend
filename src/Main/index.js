@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import TopAppBar from './TopAppBar';
@@ -6,7 +6,7 @@ import List from './List';
 import ErrorScreen from './ErrorScreen';
 import LoadingScreen from './LoadingScreen';
 
-export const MainWrap = styled.div`
+export const Main = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -70,56 +70,39 @@ const tabsTitles = [
 
 const apiUrl = 'https://stoplight.io/mocks/kode-education/trainee-test/25143926/users';
 
-export default class Main extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      persons: [],
-      isLoading: true,
-      isError: false,
-      openedTab: tabsTitles[0].id,
-    };
-  }
+export default () => {
+  const [persons, setPersons] = useState([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [openedTab, setOpenedTab] = useState(tabsTitles[0].id);
 
-  componentDidMount() {
+  const switchOpeningTab = (id) => (openedTab !== id) && setOpenedTab(id);
+
+  useEffect(() => {
     axios.get(apiUrl)
       .then((res) => {
-        this.setState({
-          persons: res.data.items,
-          isLoading: false,
-        });
+        setPersons(res.data.items);
+        setIsLoading(false);
       })
-      .catch(() => this.setState({ isError: true, isLoading: false }));
-  }
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
+  }, []);
 
-  switchOpeningTab = (id) => {
-    const { openedTab } = this.state;
-    if (openedTab !== id) {
-      this.setState({ openedTab: id });
-    }
-  };
-
-  render() {
-    const {
-      persons,
-      isError,
-      isLoading,
-      openedTab,
-    } = this.state;
-    return (
-      <MainWrap>
-        <TopAppBar
-          switchOpeningTab={this.switchOpeningTab}
-          tabsTitles={tabsTitles}
-          openedTab={openedTab}
-        />
-        {isError && (<ErrorScreen />)}
-        {isLoading ? (
-          <LoadingScreen />
-        ) : (
-          <List openedTab={openedTab} tabsTitles={tabsTitles} persons={persons} />
-        )}
-      </MainWrap>
-    );
-  }
-}
+  return (
+    <Main>
+      <TopAppBar
+        switchOpeningTab={switchOpeningTab}
+        tabsTitles={tabsTitles}
+        openedTab={openedTab}
+      />
+      {isError && (<ErrorScreen />)}
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <List openedTab={openedTab} tabsTitles={tabsTitles} persons={persons} />
+      )}
+    </Main>
+  );
+};
