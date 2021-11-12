@@ -13,6 +13,61 @@ export const MainWrap = styled.div`
   align-items: stretch;
 `;
 
+const tabsTitles = [
+  {
+    id: 'all',
+    title: 'Все',
+  },
+  {
+    id: 'android',
+    title: 'Android',
+  },
+  {
+    id: 'ios',
+    title: 'iOS',
+  },
+  {
+    id: 'design',
+    title: 'Дизайн',
+  },
+  {
+    id: 'management',
+    title: 'Менеджмент',
+  },
+  {
+    id: 'qa',
+    title: 'QA',
+  },
+  {
+    id: 'back_office',
+    title: 'Бэк-офис',
+  },
+  {
+    id: 'frontend',
+    title: 'Frontend',
+  },
+  {
+    id: 'hr',
+    title: 'HR',
+  },
+  {
+    id: 'pr',
+    title: 'PR',
+  },
+  {
+    id: 'backend',
+    title: 'Backend',
+  },
+  {
+    id: 'support',
+    title: 'Техподдержка',
+  },
+  {
+    id: 'analytics',
+    title: 'Аналитика',
+  },
+];
+
 const apiUrl = 'https://stoplight.io/mocks/kode-education/trainee-test/25143926/users';
 
 export default class Main extends React.Component {
@@ -41,9 +96,9 @@ export default class Main extends React.Component {
 
     return (
       <MainWrap>
-        <TopAppBar />
+        <TopAppBar tabsTitles={tabsTitles} />
         {isError ? <ErrorScreen /> : ''}
-        {isLoading ? <LoadingScreen /> : <List persons={persons} />}
+        {isLoading ? <LoadingScreen /> : <List tabsTitles={tabsTitles} persons={persons} />}
       </MainWrap>
     );
   }

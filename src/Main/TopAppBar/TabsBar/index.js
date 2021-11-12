@@ -9,64 +9,10 @@ const TabsWrap = styled.div`
   border-bottom 0.33px solid #C3C3C6;
 `;
 
-const tabsTitles = [
-  {
-    id: 'all',
-    title: 'Все',
-  },
-  {
-    id: 'android',
-    title: 'Android',
-  },
-  {
-    id: 'ios',
-    title: 'iOS',
-  },
-  {
-    id: 'design',
-    title: 'Дизайн',
-  },
-  {
-    id: 'management',
-    title: 'Менеджмент',
-  },
-  {
-    id: 'qa',
-    title: 'QA',
-  },
-  {
-    id: 'back_office',
-    title: 'Бэк-офис',
-  },
-  {
-    id: 'frontend',
-    title: 'Frontend',
-  },
-  {
-    id: 'hr',
-    title: 'HR',
-  },
-  {
-    id: 'pr',
-    title: 'PR',
-  },
-  {
-    id: 'backend',
-    title: 'Backend',
-  },
-  {
-    id: 'support',
-    title: 'Техподдержка',
-  },
-  {
-    id: 'analytics',
-    title: 'Аналитика',
-  },
-];
-
 export default class TabsBar extends React.Component {
-  constructor() {
+  constructor({ tabsTitles }) {
     super();
+    // const { tabsTitles } = this.props;
     this.state = {
       openedTab: tabsTitles[0].id,
     };
@@ -81,6 +27,7 @@ export default class TabsBar extends React.Component {
 
   render() {
     const { openedTab } = this.state;
+    const { tabsTitles } = this.props;
     return (
       <TabsWrap>
         {tabsTitles.map((item) => (
