@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const TabItem = styled.button`
+const Tab = styled.button`
   padding-top: 8px;
   padding-bottom: 8px;
   padding-right: 12px;
@@ -18,25 +18,22 @@ const TabItem = styled.button`
   color: ${(props) => (props.isOpen ? '#050510' : '#97979B')};
 `;
 
-export default class Tab extends React.Component {
-  switchOpeningTab = () => {
-    const { switchOpeningTab, id } = this.props;
-    switchOpeningTab(id);
-  };
+export default (props) => {
+  const {
+    switchOpeningTab,
+    id,
+    openedTab,
+    title,
+  } = props;
 
-  render() {
-    const {
-      openedTab, id, title,
-    } = this.props;
-    const isOpen = openedTab === id;
+  const switchOpenTab = () => switchOpeningTab(id);
 
-    return (
-      <TabItem
-        isOpen={isOpen}
-        onClick={this.switchOpeningTab}
-      >
-        {title}
-      </TabItem>
-    );
-  }
-}
+  return (
+    <Tab
+      isOpen={openedTab === id}
+      onClick={switchOpenTab}
+    >
+      {title}
+    </Tab>
+  );
+};

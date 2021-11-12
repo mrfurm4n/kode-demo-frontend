@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import search from '../../../UI/icons/search.svg';
 import sort from '../../../UI/icons/sort.svg';
 
-const SearchBarWrap = styled.div`
+const SearchBar = styled.div`
   margin-top: 6px;
   margin-bottom: 6px;
   margin-right: 16px;
@@ -62,19 +62,18 @@ const SortButton = styled.button`
   cursor: pointer;
 `;
 
-export default class SearchBar extends React.Component {
-  switchOpeningSort = () => {
-    const { sortOpen, switchOpeningSort } = this.props;
-    switchOpeningSort(sortOpen);
-  }
+export default (props) => {
+  const { switchOpeningSort, sortOpen } = props;
 
-  render() {
-    return (
-      <SearchBarWrap>
-        <SearchButton />
-        <Input placeholder="Введи имя, тег, почту..." />
-        <SortButton onClick={this.switchOpeningSort} />
-      </SearchBarWrap>
-    );
-  }
-}
+  const switchOpenSort = () => {
+    switchOpeningSort(sortOpen);
+  };
+
+  return (
+    <SearchBar>
+      <SearchButton />
+      <Input placeholder="Введи имя, тег, почту..." />
+      <SortButton onClick={switchOpenSort} />
+    </SearchBar>
+  );
+};
