@@ -60,7 +60,7 @@ export default (props) => {
       <Chars>
         <Name>{`${firstName} ${lastName}`}</Name>
         <Tag>{userTag}</Tag>
-        <Departament>{`${department} ${position}`}</Departament>
+        <Departament>{`${department[0].title} ${position}`}</Departament>
       </Chars>
     </Card>
   );
