@@ -1,20 +1,42 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Tab = styled.button`
+const TabItem = styled.button`
   padding-top: 8px;
   padding-bottom: 8px;
   padding-right: 12px;
   padding-left: 12px;
-  color: #97979B;
   font-size: 15px;
-  font-weight: 500;
   line-height: 20px;
-  border: none;
   background: transparent;
   cursor: pointer;
+  border: none;
+  font-weight: 500;
+  transition: border 0.3s, color 0.3s;
+
+  border-bottom: 2px solid ${(props) => (props.isOpen ? '#6534FF' : 'transparent')};
+  color: ${(props) => (props.isOpen ? '#050510' : '#97979B')};
 `;
 
-export default ({ title }) => (
-  <Tab>{title}</Tab>
-);
+export default class Tab extends React.Component {
+  switchOpeningTab = () => {
+    const { switchOpeningTab, id } = this.props;
+    switchOpeningTab(id);
+  };
+
+  render() {
+    const {
+      openedTab, id, title,
+    } = this.props;
+    const isOpen = openedTab === id;
+
+    return (
+      <TabItem
+        isOpen={isOpen}
+        onClick={this.switchOpeningTab}
+      >
+        {title}
+      </TabItem>
+    );
+  }
+}
