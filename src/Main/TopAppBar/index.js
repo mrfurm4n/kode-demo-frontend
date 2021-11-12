@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchBar from './SearchBar';
 import Sort from './Sort';
@@ -16,42 +16,35 @@ const Title = styled.h2`
   padding-bottom: 12px;
 `;
 
-export default class TopAppBar extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      sortOpen: false,
-    };
-  }
+export default (props) => {
+  const [sortOpen, setSortOpen] = useState(false);
 
-  switchOpeningSort = (current) => this.setState({ sortOpen: !current });
+  const switchOpeningSort = (current) => setSortOpen(!current);
 
-  render() {
-    const { sortOpen } = this.state;
-    const {
-      tabsTitles,
-      switchOpeningTab,
-      openedTab,
-    } = this.props;
-    return (
-      <>
-        {sortOpen && (
-          <Sort
-            sortOpen={sortOpen}
-            switchOpeningSort={this.switchOpeningSort}
-          />
-        )}
-        <Title>Поиск</Title>
-        <SearchBar
+  const {
+    tabsTitles,
+    switchOpeningTab,
+    openedTab,
+  } = props;
+
+  return (
+    <>
+      {sortOpen && (
+        <Sort
           sortOpen={sortOpen}
-          switchOpeningSort={this.switchOpeningSort}
+          switchOpeningSort={switchOpeningSort}
         />
-        <TabsBar
-          openedTab={openedTab}
-          switchOpeningTab={switchOpeningTab}
-          tabsTitles={tabsTitles}
-        />
-      </>
-    );
-  }
-}
+      )}
+      <Title>Поиск</Title>
+      <SearchBar
+        sortOpen={sortOpen}
+        switchOpeningSort={switchOpeningSort}
+      />
+      <TabsBar
+        openedTab={openedTab}
+        switchOpeningTab={switchOpeningTab}
+        tabsTitles={tabsTitles}
+      />
+    </>
+  );
+};
