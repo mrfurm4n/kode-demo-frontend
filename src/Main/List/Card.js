@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-const Card = styled.div`
+const Card = styled(Link)`
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  cursor: pointer;
+  text-decoration: none;
 `;
 
 const Avatar = styled.img`
@@ -58,7 +61,7 @@ export default (props) => {
   return (
     <>
       {(openedTab === department[0].id || openedTab === 'all') && (
-        <Card>
+        <Card to="/profile">
           <Avatar src={avatarUrl} />
           <Chars>
             <Name>{`${firstName} ${lastName}`}</Name>

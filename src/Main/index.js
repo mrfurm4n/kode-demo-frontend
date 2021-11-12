@@ -6,7 +6,7 @@ import List from './List';
 import ErrorScreen from './ErrorScreen';
 import LoadingScreen from './LoadingScreen';
 
-export const Main = styled.div`
+export const MainWrap = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -70,7 +70,7 @@ const tabsTitles = [
 
 const apiUrl = 'https://stoplight.io/mocks/kode-education/trainee-test/25143926/users';
 
-export default () => {
+function Main() {
   const [persons, setPersons] = useState([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -93,7 +93,7 @@ export default () => {
   }, []);
 
   return (
-    <Main>
+    <MainWrap>
       <TopAppBar
         switchOpeningTab={switchOpeningTab}
         switchCheckingSort={switchCheckingSort}
@@ -112,6 +112,8 @@ export default () => {
           persons={persons}
         />
       )}
-    </Main>
+    </MainWrap>
   );
-};
+}
+
+export default Main;

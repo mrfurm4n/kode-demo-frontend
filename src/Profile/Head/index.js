@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import prevArrow from '../../UI/icons/prevArrow.svg';
 
 const Head = styled.div`
@@ -9,7 +10,7 @@ const Head = styled.div`
   text-align: center;
 `;
 
-const PrevButton = styled.button`
+const PrevButton = styled(Link)`
   height: 24px;
   width: 24px;
   display: block;
@@ -61,7 +62,7 @@ const Departament = styled.span`
 
 export default () => (
   <Head>
-    <PrevButton />
+    <PrevButton to="/" />
     <Avatar />
     <Name>Алиса Иванова</Name>
     <Tag>al</Tag>
