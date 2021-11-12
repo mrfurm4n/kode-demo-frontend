@@ -9,7 +9,60 @@ const TabsWrap = styled.div`
   border-bottom 0.33px solid #C3C3C6;
 `;
 
-const tabsTitles = ['Все', 'Designers', 'Analysts', 'Managers', 'iOS', 'Android'];
+const tabsTitles = [
+  {
+    id: 'all',
+    title: 'Все',
+  },
+  {
+    id: 'android',
+    title: 'Android',
+  },
+  {
+    id: 'ios',
+    title: 'iOS',
+  },
+  {
+    id: 'design',
+    title: 'Дизайн',
+  },
+  {
+    id: 'management',
+    title: 'Менеджмент',
+  },
+  {
+    id: 'qa',
+    title: 'QA',
+  },
+  {
+    id: 'back_office',
+    title: 'Бэк-офис',
+  },
+  {
+    id: 'frontend',
+    title: 'Frontend',
+  },
+  {
+    id: 'hr',
+    title: 'HR',
+  },
+  {
+    id: 'pr',
+    title: 'PR',
+  },
+  {
+    id: 'backend',
+    title: 'Backend',
+  },
+  {
+    id: 'support',
+    title: 'Техподдержка',
+  },
+  {
+    id: 'analytics',
+    title: 'Аналитика',
+  },
+];
 
 export default class TabsBar extends React.Component {
   constructor() {
@@ -30,11 +83,11 @@ export default class TabsBar extends React.Component {
     const { openedTab } = this.state;
     return (
       <TabsWrap>
-        {tabsTitles.map((title) => (
+        {tabsTitles.map((item) => (
           <Tab
-            key={title}
-            id={title}
-            title={title}
+            key={item.id}
+            id={item.id}
+            title={item.title}
             openedTab={openedTab}
             switchOpeningTab={this.switchOpeningTab}
           />
