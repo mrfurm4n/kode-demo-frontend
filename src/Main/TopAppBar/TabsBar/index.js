@@ -68,7 +68,7 @@ export default class TabsBar extends React.Component {
   constructor() {
     super();
     this.state = {
-      openedTab: tabsTitles[0],
+      openedTab: tabsTitles[0].id,
     };
   }
 
