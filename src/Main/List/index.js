@@ -6,6 +6,11 @@ export const CardList = styled.div`
   padding-top: 16px;
   padding-left: 16px;
   padding-right: 16px;
+  max-height: 100%;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 function List(props) {
