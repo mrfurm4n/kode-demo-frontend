@@ -2,6 +2,10 @@ html {
   font-family: 'Inter', sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 @font-face {
     font-family: 'Inter';
     src: url('UI/fonts/Inter-Medium.woff2') format('woff2'),

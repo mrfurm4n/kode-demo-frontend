@@ -6,9 +6,9 @@ const Card = styled(Link)`
   margin-bottom: 12px;
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
   cursor: pointer;
   text-decoration: none;
+  position: relative;
 `;
 
 const Avatar = styled.img`
@@ -47,6 +47,41 @@ const Departament = styled.span`
   margin-top: 3px;
 `;
 
+const Birthday = styled.span`
+  position: absolute;
+  right: 0;
+  color: #55555C;
+  text-align: right;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 400;
+`;
+
+const BirthdaySeparator = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  color: #C3C3C6;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  margin-bottom: 24px;
+  margin-top: 12px;
+  margin-right: 24px;
+  margin-left: 24px;
+
+  ::after,
+  ::before {
+    content: '';
+    height: 0.5px;
+    background-color: #C3C3C6;
+    width: calc(50% - 80px);
+  }
+`;
+
+const titlesMonths = ['янв', 'фев', 'март', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'нояб', 'дек'];
+
 export default (props) => {
   const {
     avatarUrl,
@@ -56,11 +91,34 @@ export default (props) => {
     department,
     position,
     openedTab,
+    birthdayDay,
+    birthdayMonth,
+    sortType,
+    nextYear,
+    birthday,
+    isUsed,
+    changeIsUsed,
+    isNextYear,
+    isBirthdaySortType,
   } = props;
+
+  const isShowCard = openedTab === department[0].id || openedTab === 'all';
+
+  const isShowSeparator = () => {
+    if (isBirthdaySortType && isShowCard && isNextYear(birthday)) {
+      if (isUsed > 1) return false;
+      changeIsUsed(isUsed);
+      return true;
+    }
+    return false;
+  };
 
   return (
     <>
-      {(openedTab === department[0].id || openedTab === 'all') && (
+      {isShowSeparator() && (
+        <BirthdaySeparator>{nextYear}</BirthdaySeparator>
+      )}
+      {isShowCard && (
         <Card to="/profile">
           <Avatar src={avatarUrl} />
           <Chars>
@@ -68,6 +126,7 @@ export default (props) => {
             <Tag>{userTag}</Tag>
             <Departament>{`${department[0].title} ${position}`}</Departament>
           </Chars>
+          {sortType === 'birthday' && (<Birthday>{`${birthdayDay} ${titlesMonths[birthdayMonth - 1]}`}</Birthday>)}
         </Card>
       )}
     </>
