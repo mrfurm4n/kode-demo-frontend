@@ -13,6 +13,7 @@ const Tab = styled.button`
   border: none;
   font-weight: 500;
   transition: border 0.3s, color 0.3s;
+  white-space: nowrap;
 
   border-bottom: 2px solid ${(props) => (props.isOpen ? '#6534FF' : 'transparent')};
   color: ${(props) => (props.isOpen ? '#050510' : '#97979B')};

@@ -4,6 +4,8 @@ import SearchBar from './SearchBar';
 import Sort from './Sort';
 import TabsBar from './TabsBar';
 
+const TopAppBar = styled.div``;
+
 const Title = styled.h2`
   margin: 0;
   font-weight: 700;
@@ -32,7 +34,7 @@ export default (props) => {
   } = props;
 
   return (
-    <>
+    <TopAppBar>
       {sortOpen && (
         <Sort
           sortOpen={sortOpen}
@@ -53,6 +55,6 @@ export default (props) => {
         switchOpeningTab={switchOpeningTab}
         tabsTitles={tabsTitles}
       />
-    </>
+    </TopAppBar>
   );
 };

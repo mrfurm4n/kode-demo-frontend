@@ -7,6 +7,12 @@ const TabsWrap = styled.div`
   padding-right: 16px;
   padding-left: 16px;
   border-bottom 0.33px solid #C3C3C6;
+  display: flex;
+  overflow-x: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export default ({ tabsTitles, openedTab, switchOpeningTab }) => (
