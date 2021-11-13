@@ -26,6 +26,8 @@ export default (props) => {
     switchOpeningTab,
     openedTab,
     switchCheckingSort,
+    changeSearchQuery,
+    searchQuery,
     sortType,
   } = props;
 
@@ -43,6 +45,8 @@ export default (props) => {
       <SearchBar
         sortOpen={sortOpen}
         switchOpeningSort={switchOpeningSort}
+        changeSearchQuery={changeSearchQuery}
+        searchQuery={searchQuery}
       />
       <TabsBar
         openedTab={openedTab}

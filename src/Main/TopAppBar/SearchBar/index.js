@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import search from '../../../UI/icons/search.svg';
 import sort from '../../../UI/icons/sort.svg';
@@ -63,16 +63,31 @@ const SortButton = styled.button`
 `;
 
 export default (props) => {
-  const { switchOpeningSort, sortOpen } = props;
+  const [value, setValue] = useState('');
+
+  const {
+    switchOpeningSort,
+    sortOpen,
+    changeSearchQuery,
+  } = props;
 
   const switchOpenSort = () => {
     switchOpeningSort(sortOpen);
   };
 
+  const changeQuery = () => {
+    changeSearchQuery(value);
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    changeQuery(value);
+  };
+
   return (
     <SearchBar>
       <SearchButton />
-      <Input placeholder="Введи имя, тег, почту..." />
+      <Input onChange={handleChange} value={value} placeholder="Введи имя, тег, почту..." />
       <SortButton onClick={switchOpenSort} />
     </SearchBar>
   );

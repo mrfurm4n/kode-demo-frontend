@@ -76,9 +76,11 @@ function Main() {
   const [isLoading, setIsLoading] = useState(true);
   const [openedTab, setOpenedTab] = useState(tabsTitles[0].id);
   const [sortType, setSortType] = useState('alphabet');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const switchOpeningTab = (id) => (openedTab !== id) && setOpenedTab(id);
   const switchCheckingSort = (type) => (sortType !== type) && setSortType(type);
+  const changeSearchQuery = (query) => setSearchQuery(query);
 
   useEffect(() => {
     axios.get(apiUrl)
@@ -97,6 +99,8 @@ function Main() {
       <TopAppBar
         switchOpeningTab={switchOpeningTab}
         switchCheckingSort={switchCheckingSort}
+        changeSearchQuery={changeSearchQuery}
+        searchQuery={searchQuery}
         tabsTitles={tabsTitles}
         openedTab={openedTab}
         sortType={sortType}
