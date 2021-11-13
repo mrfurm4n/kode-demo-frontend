@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import search from '../../../UI/icons/search.svg';
-import sort from '../../../UI/icons/sort.svg';
+import searchIcon from '../../../UI/icons/search.svg';
+import sortIcon from '../../../UI/icons/sort.svg';
 
 const SearchBar = styled.div`
   margin-top: 6px;
@@ -19,11 +19,9 @@ const SearchBar = styled.div`
   justify-content: space-between;
 `;
 
-const SearchButton = styled.button`
-  border: none;
+const SearchIcon = styled.img`
   display: inline-block;
-  background: url(${search}) no-repeat center center;
-  background-size: contain;
+  object-fit: contain;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -55,7 +53,7 @@ const Input = styled.input`
 const SortButton = styled.button`
   border: none;
   display: inline-block;
-  background: url(${sort}) no-repeat center center;
+  background: url(${sortIcon}) no-repeat center center;
   background-size: contain;
   width: 24px;
   height: 24px;
@@ -80,7 +78,7 @@ export default (props) => {
 
   return (
     <SearchBar>
-      <SearchButton />
+      <SearchIcon src={searchIcon} />
       <Input onChange={handleChange} value={searchQuery} placeholder="Введи имя, тег, почту..." />
       <SortButton onClick={switchOpenSort} />
     </SearchBar>
