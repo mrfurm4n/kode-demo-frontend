@@ -67,18 +67,13 @@ function List(props) {
                 isNextYear={isNextYear}
                 changeIsUsed={changeIsUsed}
                 isBirthdaySortType={isBirthdaySortType}
-                birthday={person.birthday}
                 nextYear={nextYear}
+                sortType={sortType}
+                openedTab={openedTab}
                 birthdayMonth={getMonth(person.birthday)}
                 birthdayDay={getDay(person.birthday)}
-                sortType={sortType}
-                avatarUrl={person.avatarUrl}
-                firstName={person.firstName}
-                lastName={person.lastName}
-                userTag={person.userTag}
-                openedTab={openedTab}
                 department={convertDepartament(person.department)}
-                position={person.position}
+                person={person}
               />
             </>
           ))

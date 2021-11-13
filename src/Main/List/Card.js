@@ -84,23 +84,28 @@ const titlesMonths = ['янв', 'фев', 'март', 'апр', 'май', 'ию�
 
 export default (props) => {
   const {
-    avatarUrl,
-    firstName,
-    lastName,
-    userTag,
     department,
-    position,
     openedTab,
     birthdayDay,
     birthdayMonth,
     sortType,
     nextYear,
-    birthday,
     isUsed,
     changeIsUsed,
     isNextYear,
     isBirthdaySortType,
+    person,
   } = props;
+
+  const {
+    id,
+    birthday,
+    firstName,
+    lastName,
+    userTag,
+    avatarUrl,
+    position,
+  } = person;
 
   const isShowCard = openedTab === department[0].id || openedTab === 'all';
 
@@ -119,7 +124,7 @@ export default (props) => {
         <BirthdaySeparator>{nextYear}</BirthdaySeparator>
       )}
       {isShowCard && (
-        <Card to="/profile">
+        <Card to={`/profile/${id}`}>
           <Avatar src={avatarUrl} />
           <Chars>
             <Name>{`${firstName} ${lastName}`}</Name>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import star from '../../UI/icons/star.svg';
-import phone from '../../UI/icons/phone.svg';
+import starIcon from '../../UI/icons/star.svg';
+import phoneIcon from '../../UI/icons/phone.svg';
 
 const Bottom = styled.div`
   padding-top: 26px;
@@ -54,16 +54,47 @@ const Age = styled.span`
   right: 0;
 `;
 
-export default () => (
-  <Bottom>
-    <CharItem>
-      <Icon src={star} />
-      <Birthday>5 июня 1996</Birthday>
-      <Age>24 года</Age>
-    </CharItem>
-    <CharItem>
-      <Icon src={phone} />
-      <Phone href="tel:+79999009090">+7 (999) 900 90 90</Phone>
-    </CharItem>
-  </Bottom>
-);
+const monthsTitles = ['января', 'февраля', 'марта', 'мая', 'апреля', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+export default (props) => {
+  const { person } = props;
+  const {
+    phone,
+    birthday,
+  } = person[0];
+
+  const currentYear = new Date().getFullYear();
+
+  const getYear = (date) => Number(date.slice(0, 4));
+  const getMonth = (date) => Number(date.slice(5, 7));
+  const getDay = (date) => Number(date.slice(8, 10));
+
+  const getBirthdayDate = () => `${getDay(birthday)} ${monthsTitles[getMonth(birthday)]} ${getYear(birthday)}`;
+
+  const getAge = () => {
+    const age = currentYear - getYear(birthday);
+
+    let ageRemainder = age % 100;
+    if (ageRemainder >= 5 && ageRemainder <= 20) return `${age} лет`;
+
+    ageRemainder %= 10;
+    if (ageRemainder === 1) return `${age} год`;
+    if (ageRemainder >= 2 && ageRemainder <= 4) return `${age} года`;
+
+    return `${age} лет`;
+  };
+
+  return (
+    <Bottom>
+      <CharItem>
+        <Icon src={starIcon} />
+        <Birthday>{getBirthdayDate()}</Birthday>
+        <Age>{getAge()}</Age>
+      </CharItem>
+      <CharItem>
+        <Icon src={phoneIcon} />
+        <Phone href={`tel:+1${phone.replace(/-/g, '')}`}>{phone}</Phone>
+      </CharItem>
+    </Bottom>
+  );
+};

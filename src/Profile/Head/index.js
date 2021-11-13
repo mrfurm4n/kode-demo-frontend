@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -60,12 +61,22 @@ const Departament = styled.span`
   margin-top: 12px;
 `;
 
-export default () => (
-  <Head>
-    <PrevButton to="/" />
-    <Avatar />
-    <Name>Алиса Иванова</Name>
-    <Tag>al</Tag>
-    <Departament>Designer</Departament>
-  </Head>
-);
+export default (props) => {
+  const { person } = props;
+  const {
+    avatarUrl,
+    firstName,
+    lastName,
+    userTag,
+    position,
+  } = person[0];
+  return (
+    <Head>
+      <PrevButton to="/" />
+      <Avatar src={avatarUrl} />
+      <Name>{`${firstName} ${lastName}`}</Name>
+      <Tag>{userTag}</Tag>
+      <Departament>{position}</Departament>
+    </Head>
+  );
+};

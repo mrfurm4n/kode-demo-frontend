@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import TopAppBar from './TopAppBar';
 import List from './List';
 import ErrorScreen from './ErrorScreen';
@@ -68,8 +67,6 @@ const tabsTitles = [
   },
 ];
 
-const apiUrl = 'https://stoplight.io/mocks/kode-education/trainee-test/25143926/users';
-
 const errorsData = {
   criticalError: {
     emoji: {
@@ -91,10 +88,13 @@ const errorsData = {
   },
 };
 
-function Main() {
-  const [persons, setPersons] = useState([]);
-  const [isError, setIsError] = useState([false, '']);
-  const [isLoading, setIsLoading] = useState(true);
+function Main(props) {
+  const {
+    persons,
+    isError,
+    isLoading,
+    setIsError,
+  } = props;
   const [openedTab, setOpenedTab] = useState(tabsTitles[0].id);
   const [sortType, setSortType] = useState('alphabet');
   const [searchQuery, setSearchQuery] = useState('');
@@ -107,18 +107,6 @@ function Main() {
         .includes(searchQuery.toLowerCase())
     ),
   );
-
-  useEffect(() => {
-    axios.get(apiUrl)
-      .then((res) => {
-        setPersons(res.data.items);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsError([true, 'criticalError']);
-        setIsLoading(false);
-      });
-  }, []);
 
   useEffect(() => {
     if (filteredPersons.length === 0 && searchQuery !== '') return setIsError([true, 'searchError']);
