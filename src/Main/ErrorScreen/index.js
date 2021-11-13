@@ -37,22 +37,15 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const emoji = {
-  symbol: '🛸',
-  label: 'flying saucer',
+export default (props) => {
+  const { errorData } = props;
+  const refreshPage = () => window.location.reload();
+  return (
+    <Screen>
+      <Emoji symbol={errorData.emoji.symbol} label={errorData.emoji.label} />
+      <Title>{errorData.title}</Title>
+      <Description>{errorData.description}</Description>
+      {errorData.needButton ? <Button onClick={refreshPage}>Попробовать снова</Button> : null}
+    </Screen>
+  );
 };
-
-const title = 'Какой-то сверхразум все сломал';
-
-const description = 'Постараемся быстро починить';
-
-const needButton = true;
-
-export default () => (
-  <Screen>
-    <Emoji symbol={emoji.symbol} label={emoji.label} />
-    <Title>{title}</Title>
-    <Description>{description}</Description>
-    {needButton ? <Button>Попробовать снова</Button> : null}
-  </Screen>
-);

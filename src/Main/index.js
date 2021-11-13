@@ -70,17 +70,43 @@ const tabsTitles = [
 
 const apiUrl = 'https://stoplight.io/mocks/kode-education/trainee-test/25143926/users';
 
+const errorsData = {
+  criticalError: {
+    emoji: {
+      symbol: '🛸',
+      label: 'flying saucer',
+    },
+    title: 'Какой-то сверхразум все сломал',
+    description: 'Постараемся быстро починить',
+    needButton: true,
+  },
+  searchError: {
+    emoji: {
+      symbol: '🔍',
+      label: 'magnifying glass',
+    },
+    title: 'Мы никого не нашли',
+    description: 'Попробуй скорректировать запрос',
+    needButton: false,
+  },
+};
+
 function Main() {
   const [persons, setPersons] = useState([]);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState([false, '']);
   const [isLoading, setIsLoading] = useState(true);
   const [openedTab, setOpenedTab] = useState(tabsTitles[0].id);
   const [sortType, setSortType] = useState('alphabet');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const switchOpeningTab = (id) => (openedTab !== id) && setOpenedTab(id);
-  const switchCheckingSort = (type) => (sortType !== type) && setSortType(type);
-  const changeSearchQuery = (query) => setSearchQuery(query);
+  const filteredPersons = persons.filter(
+    (person) => (
+      person
+        .firstName
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+    ),
+  );
 
   useEffect(() => {
     axios.get(apiUrl)
@@ -89,10 +115,19 @@ function Main() {
         setIsLoading(false);
       })
       .catch(() => {
-        setIsError(true);
+        setIsError([true, 'criticalError']);
         setIsLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    if (filteredPersons.length === 0 && searchQuery !== '') return setIsError([true, 'searchError']);
+    return setIsError([false, '']);
+  }, [searchQuery]);
+
+  const switchOpeningTab = (id) => (openedTab !== id) && setOpenedTab(id);
+  const switchCheckingSort = (type) => (sortType !== type) && setSortType(type);
+  const changeSearchQuery = (query) => setSearchQuery(query);
 
   return (
     <MainWrap>
@@ -105,7 +140,7 @@ function Main() {
         openedTab={openedTab}
         sortType={sortType}
       />
-      {isError && (<ErrorScreen />)}
+      {isError[0] && (<ErrorScreen errorData={errorsData[isError[1]]} />)}
       {isLoading ? (
         <LoadingScreen />
       ) : (
@@ -113,7 +148,7 @@ function Main() {
           openedTab={openedTab}
           sortType={sortType}
           tabsTitles={tabsTitles}
-          persons={persons}
+          persons={filteredPersons}
         />
       )}
     </MainWrap>
