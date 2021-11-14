@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import prevArrow from '../../UI/icons/prevArrow.svg';
 
-const Head = styled.div`
+export const Head = styled.div`
   background: #F7F7F8;
   padding-top: 22px;
   padding-bottom: 24px;
   text-align: center;
 `;
 
-const PrevButton = styled(Link)`
+export const PrevButton = styled(Link)`
   height: 24px;
   width: 24px;
   display: block;
