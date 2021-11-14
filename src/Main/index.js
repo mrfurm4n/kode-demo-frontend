@@ -47,7 +47,7 @@ function Main(props) {
 
   const filteredPersons = persons.filter(
     (person) => (
-      person
+      (person
         .firstName
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
@@ -59,13 +59,16 @@ function Main(props) {
         .userTag
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
+      ) && person
+        .department
+        .includes(openedTab === 'all' ? '' : openedTab)
     ),
   );
 
   useEffect(() => {
     if (filteredPersons.length === 0 && searchQuery !== '') return setIsError([true, 'searchError']);
     return setIsError([false, '']);
-  }, [searchQuery]);
+  }, [searchQuery, openedTab]);
 
   const switchOpeningTab = (id) => (openedTab !== id) && setOpenedTab(id);
   const switchCheckingSort = (type) => (sortType !== type) && setSortType(type);
