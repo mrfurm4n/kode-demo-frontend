@@ -62,21 +62,24 @@ const Departament = styled.span`
 `;
 
 export default (props) => {
-  const { person } = props;
+  const { person, tabsTitles } = props;
   const {
     avatarUrl,
     firstName,
     lastName,
     userTag,
-    position,
+    department,
   } = person[0];
+
+  const convertedDepartament = tabsTitles.filter((obj) => (obj.id === department ? obj : ''));
+
   return (
     <Head>
       <PrevButton to="/" />
       <Avatar src={avatarUrl} />
       <Name>{`${firstName} ${lastName}`}</Name>
       <Tag>{userTag}</Tag>
-      <Departament>{position}</Departament>
+      <Departament>{convertedDepartament[0].title}</Departament>
     </Head>
   );
 };

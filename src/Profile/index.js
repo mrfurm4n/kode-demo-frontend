@@ -7,7 +7,7 @@ import { MainWrap } from '../Main';
 import LoadingScreen from '../Main/LoadingScreen';
 
 export default (props) => {
-  const { persons, isLoading } = props;
+  const { persons, isLoading, tabsTitles } = props;
   const { id } = useParams();
 
   const filteredPersons = persons.filter(
@@ -24,7 +24,7 @@ export default (props) => {
         <LoadingScreen />
       ) : (
         <>
-          <Head person={filteredPersons} />
+          <Head tabsTitles={tabsTitles} person={filteredPersons} />
           <Bottom person={filteredPersons} />
         </>
       )}
