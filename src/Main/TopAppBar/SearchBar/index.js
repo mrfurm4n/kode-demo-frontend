@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import searchIcon from '../../../UI/icons/search.svg';
 import sortIcon from '../../../UI/icons/sort.svg';
@@ -24,7 +24,8 @@ const SearchIcon = styled.img`
   object-fit: contain;
   width: 24px;
   height: 24px;
-  cursor: pointer;
+  opacity: ${(props) => (props.isInputFocused ? '1' : '0.4')};
+  transition: opacity 0.2s;
 `;
 
 const Input = styled.input`
@@ -58,15 +59,23 @@ const SortButton = styled.button`
   width: 24px;
   height: 24px;
   cursor: pointer;
+  filter: grayscale(${(props) => (props.isBirthdaySortType ? '0' : '1')});
+  opacity: ${(props) => (props.isBirthdaySortType ? '1' : '0.4')};
+  transition: filter 0.2s, opacity 0.2s;
 `;
 
 export default (props) => {
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
   const {
     switchOpeningSort,
     sortOpen,
     changeSearchQuery,
     searchQuery,
+    sortType,
   } = props;
+
+  const isBirthdaySortType = sortType === 'birthday';
 
   const switchOpenSort = () => {
     switchOpeningSort(sortOpen);
@@ -76,11 +85,15 @@ export default (props) => {
     changeSearchQuery(event.target.value);
   };
 
+  const onFocus = () => setIsInputFocused(true);
+
+  const onBlur = () => setIsInputFocused(false);
+
   return (
     <SearchBar>
-      <SearchIcon src={searchIcon} />
-      <Input onChange={handleChange} value={searchQuery} placeholder="Введи имя, тег, почту..." />
-      <SortButton onClick={switchOpenSort} />
+      <SearchIcon isInputFocused={isInputFocused} src={searchIcon} />
+      <Input onChange={handleChange} onFocus={onFocus} onBlur={onBlur} value={searchQuery} placeholder="Введи имя, тег, почту..." />
+      <SortButton isBirthdaySortType={isBirthdaySortType} onClick={switchOpenSort} />
     </SearchBar>
   );
 };
