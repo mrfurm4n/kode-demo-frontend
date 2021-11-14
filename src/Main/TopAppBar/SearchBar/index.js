@@ -92,7 +92,7 @@ export default (props) => {
   return (
     <SearchBar>
       <SearchIcon isInputFocused={isInputFocused} src={searchIcon} />
-      <Input onChange={handleChange} onFocus={onFocus} onBlur={onBlur} value={searchQuery} placeholder="Введи имя, тег, почту..." />
+      <Input onChange={handleChange} onFocus={onFocus} onBlur={onBlur} value={searchQuery} placeholder="Введи имя, фамилию, тег..." />
       <SortButton isBirthdaySortType={isBirthdaySortType} onClick={switchOpenSort} />
     </SearchBar>
   );
