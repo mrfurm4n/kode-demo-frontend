@@ -20,10 +20,10 @@ function List(props) {
     openedTab,
     sortType,
   } = props;
-  const [isUsed, setIsUsed] = useState(0);
-  const isBirthdaySortType = sortType === 'birthday';
 
-  const changeIsUsed = () => setIsUsed(1);
+  const [isSeparatorUsed] = useState(false);
+
+  const isBirthdaySortType = sortType === 'birthday';
 
   const todayDate = new Date();
   const formatToday = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
@@ -60,22 +60,18 @@ function List(props) {
             return null;
           })
           .map((person) => (
-            <>
-              <Card
-                key={person.id}
-                isUsed={isUsed}
-                isNextYear={isNextYear}
-                changeIsUsed={changeIsUsed}
-                isBirthdaySortType={isBirthdaySortType}
-                nextYear={nextYear}
-                sortType={sortType}
-                openedTab={openedTab}
-                birthdayMonth={getMonth(person.birthday)}
-                birthdayDay={getDay(person.birthday)}
-                department={convertDepartament(person.department)}
-                person={person}
-              />
-            </>
+            <Card
+              key={person.id}
+              isSeparatorUsed={isSeparatorUsed}
+              isBirthdaySortType={isBirthdaySortType}
+              nextYear={nextYear}
+              isNextYear={isNextYear}
+              openedTab={openedTab}
+              birthdayMonth={getMonth(person.birthday)}
+              birthdayDay={getDay(person.birthday)}
+              department={convertDepartament(person.department)}
+              person={person}
+            />
           ))
       }
     </CardList>

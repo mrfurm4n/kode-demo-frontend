@@ -88,11 +88,9 @@ export default (props) => {
     openedTab,
     birthdayDay,
     birthdayMonth,
-    sortType,
     nextYear,
-    isUsed,
-    changeIsUsed,
     isNextYear,
+    isSeparatorUsed,
     isBirthdaySortType,
     person,
   } = props;
@@ -109,18 +107,12 @@ export default (props) => {
 
   const isShowCard = openedTab === department[0].id || openedTab === 'all';
 
-  const isShowSeparator = () => {
-    if (isBirthdaySortType && isShowCard && isNextYear(birthday)) {
-      if (isUsed > 1) return false;
-      changeIsUsed(isUsed);
-      return true;
-    }
-    return false;
-  };
+  const isShowSeparator = isBirthdaySortType && isShowCard
+    && isNextYear(birthday) && !isSeparatorUsed;
 
   return (
     <>
-      {isShowSeparator() && (
+      {isShowSeparator && isShowCard && (
         <BirthdaySeparator>{nextYear}</BirthdaySeparator>
       )}
       {isShowCard && (
@@ -131,7 +123,7 @@ export default (props) => {
             <Tag>{userTag}</Tag>
             <Departament>{`${department[0].title} ${position}`}</Departament>
           </Chars>
-          {sortType === 'birthday' && (<Birthday>{`${birthdayDay} ${titlesMonths[birthdayMonth - 1]}`}</Birthday>)}
+          {isBirthdaySortType && (<Birthday>{`${birthdayDay} ${titlesMonths[birthdayMonth - 1]}`}</Birthday>)}
         </Card>
       )}
     </>
