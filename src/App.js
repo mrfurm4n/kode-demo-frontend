@@ -67,6 +67,7 @@ const tabsTitles = [
 
 export default () => {
   const [persons, setPersons] = useState([]);
+  const [isOnline, setIsOnline] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState([false, '']);
 
@@ -82,10 +83,17 @@ export default () => {
       });
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsOnline(window.navigator.onLine);
+    }, 1000);
+    return () => clearInterval(timer);
+  });
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" exact element={<Main tabsTitles={tabsTitles} persons={persons} isError={isError} isLoading={isLoading} setIsError={setIsError} />} />
+        <Route path="/" exact element={<Main tabsTitles={tabsTitles} persons={persons} isError={isError} isOnline={isOnline} isLoading={isLoading} setIsError={setIsError} />} />
         <Route path="/profile/:id" element={<Profile tabsTitles={tabsTitles} isLoading={isLoading} persons={persons} />} />
       </Routes>
     </BrowserRouter>

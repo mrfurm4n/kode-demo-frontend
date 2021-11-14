@@ -38,6 +38,7 @@ function Main(props) {
     persons,
     isError,
     isLoading,
+    isOnline,
     setIsError,
     tabsTitles,
   } = props;
@@ -84,6 +85,7 @@ function Main(props) {
         tabsTitles={tabsTitles}
         openedTab={openedTab}
         sortType={sortType}
+        isOnline={isOnline}
       />
       {isError[0] && (<ErrorScreen errorData={errorsData[isError[1]]} />)}
       {isLoading ? (
