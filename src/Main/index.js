@@ -105,6 +105,14 @@ function Main(props) {
         .firstName
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
+      || person
+        .lastName
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
+      || person
+        .userTag
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
     ),
   );
 
