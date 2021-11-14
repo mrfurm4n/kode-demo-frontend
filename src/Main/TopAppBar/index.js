@@ -10,18 +10,25 @@ const Title = styled.h2`
   margin: 0;
   font-weight: 700;
   font-size: 24px;
-  color: ${(props) => (props.isOnline ? '#050510' : '#fff')};
+  color: ${(props) => {
+    if (!props.isOnline) return '#fff';
+    if (props.isConnected) return '#fff';
+    return '#050510';
+  }};
+
   line-height: 1.2;
   padding-top: 16px;
   padding-right: 24px;
   padding-left: 24px;
   padding-bottom: 12px;
-  transition: color 0.2s;
 `;
 
 const OfflineBar = styled.div`
-  background: ${(props) => (props.isOnline ? 'transparent' : '#F44336')};
-  transition: background-color 0.2s;
+  background: ${(props) => {
+    if (!props.isOnline) return '#F44336';
+    if (props.isConnected) return '#6534FF';
+    return 'transaprent';
+  }};
 `;
 
 const OfflineTitle = styled.span`
@@ -50,6 +57,7 @@ export default (props) => {
     searchQuery,
     sortType,
     isOnline,
+    isConnected,
   } = props;
 
   return (
@@ -62,9 +70,9 @@ export default (props) => {
           sortType={sortType}
         />
       )}
-      <OfflineBar isOnline={isOnline}>
-        <Title isOnline={isOnline}>Поиск</Title>
-        {isOnline && (
+      <OfflineBar isOnline={isOnline} isConnected={isConnected}>
+        <Title isOnline={isOnline} isConnected={isConnected}>Поиск</Title>
+        {isOnline && !isConnected && (
           <SearchBar
             sortOpen={sortOpen}
             switchOpeningSort={switchOpeningSort}
@@ -73,8 +81,11 @@ export default (props) => {
             sortType={sortType}
           />
         )}
-        {!isOnline && (
+        {!isOnline && !isConnected && (
           <OfflineTitle>Не могу обновить данные. Проверь соединение с интернетом.</OfflineTitle>
+        )}
+        {isConnected && (
+          <OfflineTitle>Секундочку, гружусь...</OfflineTitle>
         )}
       </OfflineBar>
       <TabsBar

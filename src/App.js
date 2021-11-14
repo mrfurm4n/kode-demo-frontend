@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
@@ -68,23 +69,37 @@ const tabsTitles = [
 export default () => {
   const [persons, setPersons] = useState([]);
   const [isOnline, setIsOnline] = useState(true);
+  const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState([false, '']);
 
+  const initAppState = () => {
+    setIsOnline(window.navigator.onLine);
+    setIsError([false, '']);
+    setIsLoading(true);
+  };
+
+  const checkConnected = () => ((!isOnline && window.navigator.onLine) ? setIsConnected(true) : setIsConnected(false));
+
   useEffect(() => {
-    axios.get(apiUrl)
-      .then((res) => {
-        setPersons(res.data.items);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsError([true, 'criticalError']);
-        setIsLoading(false);
-      });
-  }, []);
+    if (isOnline) {
+      initAppState();
+
+      axios.get(apiUrl)
+        .then((res) => {
+          setPersons(res.data.items);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsError([true, 'criticalError']);
+          setIsLoading(false);
+        });
+    }
+  }, [isOnline]);
 
   useEffect(() => {
     const timer = setInterval(() => {
+      checkConnected();
       setIsOnline(window.navigator.onLine);
     }, 1000);
     return () => clearInterval(timer);
@@ -93,7 +108,7 @@ export default () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" exact element={<Main tabsTitles={tabsTitles} persons={persons} isError={isError} isOnline={isOnline} isLoading={isLoading} setIsError={setIsError} />} />
+        <Route path="/" exact element={<Main isConnected={isConnected} tabsTitles={tabsTitles} persons={persons} isError={isError} isOnline={isOnline} isLoading={isLoading} setIsError={setIsError} />} />
         <Route path="/profile/:id" element={<Profile tabsTitles={tabsTitles} isLoading={isLoading} persons={persons} />} />
       </Routes>
     </BrowserRouter>
