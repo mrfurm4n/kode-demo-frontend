@@ -1,10 +1,9 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import prevArrow from '../../UI/icons/prevArrow.svg';
 
-export const Head = styled.div`
+export const HeadWrap = styled.div`
   background: #F7F7F8;
   padding-top: 22px;
   padding-bottom: 24px;
@@ -61,7 +60,7 @@ const Departament = styled.span`
   margin-top: 12px;
 `;
 
-export default (props) => {
+function Head(props) {
   const { person, tabsTitles } = props;
   const {
     avatarUrl,
@@ -71,15 +70,18 @@ export default (props) => {
     department,
   } = person[0];
 
+  // convert departament title as tab title
   const convertedDepartament = tabsTitles.filter((obj) => (obj.id === department ? obj : ''));
 
   return (
-    <Head>
+    <HeadWrap>
       <PrevButton to="/" />
       <Avatar src={avatarUrl} />
       <Name>{`${firstName} ${lastName}`}</Name>
       <Tag>{userTag}</Tag>
       <Departament>{convertedDepartament[0].title}</Departament>
-    </Head>
+    </HeadWrap>
   );
-};
+}
+
+export default Head;

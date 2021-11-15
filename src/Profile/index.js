@@ -1,4 +1,3 @@
-// import React, { useEffect, useState } from 'react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Head from './Head';
@@ -10,13 +9,8 @@ export default (props) => {
   const { persons, isLoading, tabsTitles } = props;
   const { id } = useParams();
 
-  const filteredPersons = persons.filter(
-    (person) => (
-      person
-        .id
-        .includes(id)
-    ),
-  );
+  // get one person by id-filtered all persons
+  const filteredPerson = persons.filter((person) => person.id.includes(id));
 
   return (
     <MainWrap>
@@ -24,8 +18,8 @@ export default (props) => {
         <LoadingScreen />
       ) : (
         <>
-          <Head tabsTitles={tabsTitles} person={filteredPersons} />
-          <Bottom person={filteredPersons} />
+          <Head tabsTitles={tabsTitles} person={filteredPerson} />
+          <Bottom person={filteredPerson} />
         </>
       )}
     </MainWrap>
