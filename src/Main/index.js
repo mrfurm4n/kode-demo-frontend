@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import TopAppBar from './TopAppBar';
 import List from './List';
+import TopAppBar from './TopAppBar';
 import ErrorScreen from './ErrorScreen';
 import LoadingScreen from './LoadingScreen';
 
@@ -43,10 +43,17 @@ function Main(props) {
     setIsError,
     tabsTitles,
   } = props;
+
   const [openedTab, setOpenedTab] = useState(tabsTitles[0].id);
   const [sortType, setSortType] = useState('alphabet');
   const [searchQuery, setSearchQuery] = useState('');
 
+  // change states
+  const switchOpeningTab = (id) => (openedTab !== id) && setOpenedTab(id);
+  const switchCheckingSort = (type) => (sortType !== type) && setSortType(type);
+  const changeSearchQuery = (query) => setSearchQuery(query);
+
+  // filter persons by searching query
   const filteredPersons = persons.filter(
     (person) => (
       (person
@@ -63,31 +70,28 @@ function Main(props) {
         .includes(searchQuery.toLowerCase())
       ) && person
         .department
-        .includes(openedTab === 'all' ? '' : openedTab)
+        .includes(openedTab !== 'all' ? openedTab : '')
     ),
   );
 
+  // switch state of searching error
   useEffect(() => {
     if (filteredPersons.length === 0 && searchQuery !== '') return setIsError([true, 'searchError']);
     return setIsError([false, '']);
   }, [searchQuery, openedTab]);
 
-  const switchOpeningTab = (id) => (openedTab !== id) && setOpenedTab(id);
-  const switchCheckingSort = (type) => (sortType !== type) && setSortType(type);
-  const changeSearchQuery = (query) => setSearchQuery(query);
-
   return (
     <MainWrap>
       <TopAppBar
-        switchOpeningTab={switchOpeningTab}
         switchCheckingSort={switchCheckingSort}
         changeSearchQuery={changeSearchQuery}
+        switchOpeningTab={switchOpeningTab}
+        isConnected={isConnected}
         searchQuery={searchQuery}
         tabsTitles={tabsTitles}
         openedTab={openedTab}
         sortType={sortType}
         isOnline={isOnline}
-        isConnected={isConnected}
       />
       {isError[0] && (<ErrorScreen errorData={errorsData[isError[1]]} />)}
       {isLoading ? (
