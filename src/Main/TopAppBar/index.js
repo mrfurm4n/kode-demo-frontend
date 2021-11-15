@@ -44,10 +44,6 @@ const OfflineTitle = styled.span`
 `;
 
 export default (props) => {
-  const [sortOpen, setSortOpen] = useState(false);
-
-  const switchOpeningSort = (current) => setSortOpen(!current);
-
   const {
     tabsTitles,
     switchOpeningTab,
@@ -60,13 +56,17 @@ export default (props) => {
     isConnected,
   } = props;
 
+  const [sortOpen, setSortOpen] = useState(false);
+
+  const switchOpeningSort = (current) => setSortOpen(!current);
+
   return (
     <TopAppBar>
       {sortOpen && (
         <Sort
-          sortOpen={sortOpen}
           switchOpeningSort={switchOpeningSort}
           switchCheckingSort={switchCheckingSort}
+          sortOpen={sortOpen}
           sortType={sortType}
         />
       )}

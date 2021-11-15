@@ -65,8 +65,6 @@ const SortButton = styled.button`
 `;
 
 export default (props) => {
-  const [isInputFocused, setIsInputFocused] = useState(false);
-
   const {
     switchOpeningSort,
     sortOpen,
@@ -76,6 +74,8 @@ export default (props) => {
   } = props;
 
   const isBirthdaySortType = sortType === 'birthday';
+
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const switchOpenSort = () => {
     switchOpeningSort(sortOpen);

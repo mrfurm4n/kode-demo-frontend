@@ -22,9 +22,9 @@ const Tab = styled.button`
 export default (props) => {
   const {
     switchOpeningTab,
-    id,
     openedTab,
     title,
+    id,
   } = props;
 
   const switchOpenTab = () => switchOpeningTab(id);
