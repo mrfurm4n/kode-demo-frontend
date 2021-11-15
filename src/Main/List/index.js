@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Card from './Card';
 
@@ -13,6 +13,26 @@ export const CardList = styled.div`
   }
 `;
 
+// get dates and format date
+const todayDate = new Date();
+const nextYear = `${todayDate.getFullYear() + 1}`;
+const formatToday = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
+
+// slice string-date
+const getMonth = (birthday) => Number(birthday.slice(5, 7));
+const getDay = (birthday) => Number(birthday.slice(8, 10));
+
+// get boolean of next year
+export const isNextYear = (birthday) => {
+  if (getMonth(birthday) === getMonth(formatToday)) return getDay(birthday) < getDay(formatToday);
+  return getMonth(birthday) < getMonth(formatToday);
+};
+
+// comare dates
+const compareDay = (first, second) => (getDay(first) < getDay(second) ? 1 : -1);
+const compareMonth = (first, second) => (getMonth(first) > getMonth(second) ? 1 : -1);
+const compareYear = (first, second) => (isNextYear(first) < isNextYear(second) ? -1 : 1);
+
 function List(props) {
   const {
     persons,
@@ -21,26 +41,9 @@ function List(props) {
     sortType,
   } = props;
 
-  const [isSeparatorUsed] = useState(false);
-
   const isBirthdaySortType = sortType === 'birthday';
 
-  const todayDate = new Date();
-  const formatToday = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
-  const nextYear = `${todayDate.getFullYear() + 1}`;
-
-  const getMonth = (birthday) => Number(birthday.slice(5, 7));
-  const getDay = (birthday) => Number(birthday.slice(8, 10));
-
-  const isNextYear = (birthday) => {
-    if (getMonth(birthday) === getMonth(formatToday)) return getDay(birthday) < getDay(formatToday);
-    return getMonth(birthday) < getMonth(formatToday);
-  };
-
-  const compareDay = (first, second) => (getDay(first) < getDay(second) ? 1 : -1);
-  const compareMonth = (first, second) => (getMonth(first) > getMonth(second) ? 1 : -1);
-  const compareYear = (first, second) => (isNextYear(first) < isNextYear(second) ? -1 : 1);
-
+  // convert departament (russian titles of tabs)
   const convertDepartament = (departament) => tabsTitles.filter((obj) => (obj.id === departament ? obj : ''));
 
   return (
@@ -62,14 +65,13 @@ function List(props) {
           .map((person) => (
             <Card
               key={person.id}
-              isSeparatorUsed={isSeparatorUsed}
               isBirthdaySortType={isBirthdaySortType}
+              openedTab={openedTab}
               nextYear={nextYear}
               isNextYear={isNextYear}
-              openedTab={openedTab}
+              department={convertDepartament(person.department)}
               birthdayMonth={getMonth(person.birthday)}
               birthdayDay={getDay(person.birthday)}
-              department={convertDepartament(person.department)}
               person={person}
             />
           ))

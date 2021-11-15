@@ -90,7 +90,6 @@ export default (props) => {
     birthdayMonth,
     nextYear,
     isNextYear,
-    isSeparatorUsed,
     isBirthdaySortType,
     person,
   } = props;
@@ -107,8 +106,7 @@ export default (props) => {
 
   const isShowCard = openedTab === department[0].id || openedTab === 'all';
 
-  const isShowSeparator = isBirthdaySortType && isShowCard
-    && isNextYear(birthday) && !isSeparatorUsed;
+  const isShowSeparator = isBirthdaySortType && isShowCard && isNextYear(birthday);
 
   return (
     <>
