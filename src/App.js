@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
@@ -11,6 +10,7 @@ import Profile from './Profile';
 
 const apiUrl = 'https://stoplight.io/mocks/kode-education/trainee-test/25143926/users';
 
+// "hardcode" titles of tabs
 const tabsTitles = [
   {
     id: 'all',
@@ -73,35 +73,29 @@ export default () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState([false, '']);
 
-  const initAppState = () => {
-    setIsOnline(window.navigator.onLine);
-    setIsError([false, '']);
-    setIsLoading(true);
-  };
+  // init default states if app online
+  const initOnlineStates = () => setIsOnline(window.navigator.onLine)
+    && setIsError([false, ''])
+    && setIsLoading(true);
 
-  const checkConnected = () => ((!isOnline && window.navigator.onLine) ? setIsConnected(true) : setIsConnected(false));
+  // change state of connected
+  const checkConnected = () => (
+    !isOnline && window.navigator.onLine ? setIsConnected(true) : setIsConnected(false)
+  );
 
+  // get data if app online
   useEffect(() => {
     if (isOnline) {
-      initAppState();
-
+      initOnlineStates();
       axios.get(apiUrl)
-        .then((res) => {
-          setPersons(res.data.items);
-          setIsLoading(false);
-        })
-        .catch(() => {
-          setIsError([true, 'criticalError']);
-          setIsLoading(false);
-        });
+        .then((res) => setPersons(res.data.items) && setIsLoading(false))
+        .catch(() => setIsError([true, 'criticalError']) && setIsLoading(false));
     }
   }, [isOnline]);
 
+  // timer for detect online/offline
   useEffect(() => {
-    const timer = setInterval(() => {
-      checkConnected();
-      setIsOnline(window.navigator.onLine);
-    }, 1000);
+    const timer = setInterval(() => checkConnected() && setIsOnline(window.navigator.onLine), 1000);
     return () => clearInterval(timer);
   });
 
