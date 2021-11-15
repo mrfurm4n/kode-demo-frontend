@@ -37,15 +37,18 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+const refreshPage = () => window.location.reload();
+
 export default (props) => {
   const { errorData } = props;
-  const refreshPage = () => window.location.reload();
+  const { symbol, label } = errorData.emoji;
+  const { title, description, needButton } = errorData;
   return (
     <Screen>
-      <Emoji symbol={errorData.emoji.symbol} label={errorData.emoji.label} />
-      <Title>{errorData.title}</Title>
-      <Description>{errorData.description}</Description>
-      {errorData.needButton ? <Button onClick={refreshPage}>Попробовать снова</Button> : null}
+      <Emoji symbol={symbol} label={label} />
+      <Title>{title}</Title>
+      <Description>{description}</Description>
+      {needButton ? <Button onClick={refreshPage}>Попробовать снова</Button> : ''}
     </Screen>
   );
 };
