@@ -74,9 +74,11 @@ export default () => {
   const [isError, setIsError] = useState([false, '']);
 
   // init default states if app online
-  const initOnlineStates = () => setIsOnline(window.navigator.onLine)
-    && setIsError([false, ''])
-    && setIsLoading(true);
+  const initOnlineStates = () => {
+    setIsOnline(window.navigator.onLine);
+    setIsError([false, '']);
+    setIsLoading(true);
+  };
 
   // change state of connected
   const checkConnected = () => (
@@ -88,14 +90,23 @@ export default () => {
     if (isOnline) {
       initOnlineStates();
       axios.get(apiUrl)
-        .then((res) => setPersons(res.data.items) && setIsLoading(false))
-        .catch(() => setIsError([true, 'criticalError']) && setIsLoading(false));
+        .then((res) => {
+          setPersons(res.data.items);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsError([true, 'criticalError']);
+          setIsLoading(false);
+        });
     }
   }, [isOnline]);
 
   // timer for detect online/offline
   useEffect(() => {
-    const timer = setInterval(() => checkConnected() && setIsOnline(window.navigator.onLine), 1000);
+    const timer = setInterval(() => {
+      checkConnected();
+      setIsOnline(window.navigator.onLine);
+    }, 1000);
     return () => clearInterval(timer);
   });
 
